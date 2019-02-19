@@ -12,7 +12,7 @@ npm start
 
 ![end](./images/end_game.png)
 
-##License
+## License
 
 This project is licensed under the MIT License
 
