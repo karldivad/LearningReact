@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from 'prop-types';
 
 export function Square(props) { //function better for only render() classes
     return (
@@ -7,3 +8,9 @@ export function Square(props) { //function better for only render() classes
         </button>
     );
 }
+
+Square.propTypes = {
+    onClick: PropTypes.func,
+    style: PropTypes.object,
+    value: PropTypes.string,
+};

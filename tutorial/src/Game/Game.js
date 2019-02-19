@@ -1,4 +1,6 @@
 import React from "react";
+import PropTypes from 'prop-types';
+
 import './Game.css';
 
 import {Board} from "./Board";
@@ -136,3 +138,8 @@ export class Game extends React.Component {
         }
     }
 }
+
+Game.propTypes = {
+    cols: PropTypes.number,
+    rows: PropTypes.number
+};
