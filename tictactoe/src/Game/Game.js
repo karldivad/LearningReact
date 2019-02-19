@@ -7,6 +7,9 @@ import {Board} from "./Board";
 import {calculateWinner} from "./Utils";
 
 export class Game extends React.Component {
+
+    static displayName = "Game_Component";
+
     constructor(props) {
         super(props);
         this.state = {

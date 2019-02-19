@@ -5,6 +5,8 @@ import {Square} from "./Square";
 
 export class Board extends React.Component {
 
+    static displayName = "Board_Component";
+
     renderSquare(i) {
 
         let styleWinner = {
