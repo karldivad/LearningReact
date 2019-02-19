@@ -14,6 +14,7 @@ export class Board extends React.Component {
 
         return (
             <Square
+                key = {i}
                 value={this.props.squares[i]}
                 onClick={() => this.props.onClick(i)}
                 style={this.props.winSquares.includes(i) ? styleWinner : null}
@@ -29,7 +30,7 @@ export class Board extends React.Component {
             for(let cols = 0; cols < this.props.cols; cols++, counter++){
                 children.push(this.renderSquare(counter));
             }
-            squares.push(<div className={"board-row"}>{children}</div>)
+            squares.push(<div key = {row} className={"board-row"}>{children}</div>)
         }
 
         return (
