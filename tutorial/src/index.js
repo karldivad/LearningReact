@@ -83,6 +83,7 @@ class Game extends React.Component {
 
         let status;
         if(winner){
+            alert('Winner: ' + winner);
             status = 'Winner: ' + winner;
         }else {
             status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
@@ -92,8 +93,8 @@ class Game extends React.Component {
             <div className="game">
                 <div className="game-board">
                     <Board
-                        rows={3}
-                        cols={3}
+                        rows={this.props.rows}
+                        cols={this.props.cols}
                         squares={current.squares}
                         onClick={(i)=>this.handleClick(i)}
                     />
@@ -120,9 +121,11 @@ class Game extends React.Component {
         const current = history[history.length - 1];
         // non-mutating approach:
         const squares = current.squares.slice();
-        if(calculateWinner(squares) || squares[i]){
+
+        if(squares[i]) {
             return;
         }
+
         squares[i] = this.state.xIsNext ? 'X' : 'O';
         this.setState({
            selected: null,
@@ -135,7 +138,14 @@ class Game extends React.Component {
             }]),
             stepNumber: history.length,
             xIsNext:!this.state.xIsNext,
-        })
+        });
+
+        if(calculateWinner(squares)){
+            return;
+        }
+        if(history.length >= this.props.rows * this.props.cols){
+            alert('Draw game!');
+        }
     }
 }
 
@@ -164,6 +174,9 @@ export function calculateWinner(squares) {
 // ========================================
 
 ReactDOM.render(
-    <Game />,
+    <Game
+        rows={3}
+        cols={3}
+    />,
     document.getElementById('root')
 );
