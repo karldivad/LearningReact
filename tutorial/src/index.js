@@ -22,23 +22,19 @@ class Board extends React.Component {
     }
 
     render() {
+        let counter = 0;
+        let squares = [];
+        for(let row = 0; row < this.props.rows; row ++) {
+            let children = [];
+            for(let cols = 0; cols < this.props.cols; cols++, counter++){
+                children.push(this.renderSquare(counter));
+            }
+            squares.push(<div className={"board-row"}>{children}</div>)
+        }
+
         return (
             <div>
-                <div className="board-row">
-                    {this.renderSquare(0)}
-                    {this.renderSquare(1)}
-                    {this.renderSquare(2)}
-                </div>
-                <div className="board-row">
-                    {this.renderSquare(3)}
-                    {this.renderSquare(4)}
-                    {this.renderSquare(5)}
-                </div>
-                <div className="board-row">
-                    {this.renderSquare(6)}
-                    {this.renderSquare(7)}
-                    {this.renderSquare(8)}
-                </div>
+                {squares}
             </div>
         );
     }
@@ -96,6 +92,8 @@ class Game extends React.Component {
             <div className="game">
                 <div className="game-board">
                     <Board
+                        rows={3}
+                        cols={3}
                         squares={current.squares}
                         onClick={(i)=>this.handleClick(i)}
                     />
@@ -126,7 +124,9 @@ class Game extends React.Component {
             return;
         }
         squares[i] = this.state.xIsNext ? 'X' : 'O';
-        this.state.selected = null;
+        this.setState({
+           selected: null,
+        });
         this.setState({
             history: history.concat([{ // concat doesn't mutate the original
                 squares:squares,
