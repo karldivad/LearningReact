@@ -1,4 +1,5 @@
 import React from "react";
+import './Game.css';
 
 import {Board} from "./Board";
 import {calculateWinner} from "./Utils";
@@ -8,7 +9,7 @@ export class Game extends React.Component {
         super(props);
         this.state = {
             history: [{
-                squares: Array(9).fill(null),
+                squares: Array(this.props.rows * this.props.cols).fill(null),
                 newStepRow: null,
                 newStepColumn: null,
             }],
@@ -83,11 +84,11 @@ export class Game extends React.Component {
         let moves = document.getElementById('moves');
         if(this.state.sort){
             Array.from(moves.getElementsByTagName('li'))
-                .sort((a,b) => {a.textContent.localeCompare(b.textContent)}).reverse()
+                .sort((a,b) => a.textContent.localeCompare(b.textContent)).reverse()
                 .forEach(li => moves.appendChild(li));
         }else{
             Array.from(moves.getElementsByTagName('li'))
-                .sort((a,b) => {a.textContent.localeCompare(b.textContent)})
+                .sort((a,b) => a.textContent.localeCompare(b.textContent))
                 .forEach(li => moves.appendChild(li));
         }
         this.setState({
@@ -96,7 +97,6 @@ export class Game extends React.Component {
     }
 
     jumpTo(step){
-
         this.setState({
             selected: step,
             stepNumber: step,
