@@ -59,6 +59,7 @@ class Game extends React.Component {
             selected: null,
             stepNumber: 0,
             xIsNext: true,
+            sort: true,
         };
     }
 
@@ -113,10 +114,29 @@ class Game extends React.Component {
                 </div>
                 <div className="game-info">
                     <div>{status}</div>
-                    <ol>{moves}</ol>
+                    <ol id="moves">{moves}</ol>
+                </div>
+                <div className="sort-button">
+                   <button onClick={()=>this.sortMoves()}>Sort moves</button>
                 </div>
             </div>
         );
+    }
+
+    sortMoves(){
+        let moves = document.getElementById('moves');
+        if(this.state.sort){
+            Array.from(moves.getElementsByTagName('li'))
+                .sort((a,b) => {a.textContent.localeCompare(b.textContent)}).reverse()
+                .forEach(li => moves.appendChild(li));
+        }else{
+            Array.from(moves.getElementsByTagName('li'))
+                .sort((a,b) => {a.textContent.localeCompare(b.textContent)})
+                .forEach(li => moves.appendChild(li));
+        }
+        this.setState({
+            sort:!this.state.sort
+        });
     }
 
     jumpTo(step){
