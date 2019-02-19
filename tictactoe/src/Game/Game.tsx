@@ -6,7 +6,11 @@ import './Game.css';
 import {Board} from "./Board";
 import {calculateWinner} from "./Utils";
 
-export class Game extends React.Component {
+export class Game extends React.Component<any,any> {
+    public static propTypes = {
+        cols: PropTypes.number,
+        rows: PropTypes.number
+    };
 
     static displayName = "Game_Component";
 
@@ -34,10 +38,10 @@ export class Game extends React.Component {
             winner = current.squares[winnerResult[0]];
         }
 
-        let style = {
+        const style = {
             fontWeight: 'bold',
             color: 'skyblue',
-        };
+        } as React.CSSProperties; 
 
         const moves = history.map((step, move) =>{
             const desc = move ?
@@ -141,8 +145,3 @@ export class Game extends React.Component {
         }
     }
 }
-
-Game.propTypes = {
-    cols: PropTypes.number,
-    rows: PropTypes.number
-};
